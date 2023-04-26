@@ -1,0 +1,34 @@
+modules:
+  jira:adminPage:
+    - key: admin-page-example-hello-world-admin-page
+      function: main-admin-page
+      title: Admin page example
+    - key: admin-page-example-hello-world-configure-page
+      function: main-configure-page
+      title: Configure page example
+      useAsConfig: true
+    - key: admin-page-example-hello-world-get-started-page
+      function: main-get-started-page
+      title: Get started page example
+      useAsGetStarted: true
+  trigger:
+    - key: issue-created-event
+      function: created-event-func
+      events:
+        - avi:jira:created:issue
+  function:
+    - key: main-admin-page
+      handler: index.runAdmin
+    - key: main-configure-page
+      handler: index.runConfig
+    - key: main-get-started-page
+      handler: index.runGetStarted
+    - key: created-event-func
+      handler: index.runCreateComment
+app:
+  id: ari:cloud:ecosystem::app/50ac0801-d744-4951-8186-bb058d4ce96c
+permissions:
+  scopes:
+    - read:jira-work
+    - write:jira-work
+    - storage:app
